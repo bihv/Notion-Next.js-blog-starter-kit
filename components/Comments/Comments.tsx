@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import cs from 'classnames';
 import { formatDistance } from 'date-fns';
-import ko from 'date-fns/locale/ko';
+import enUS from 'date-fns/locale/en-US';
 import { useFormik } from 'formik';
 import useSWR from 'swr';
 
@@ -44,24 +44,24 @@ const Comments = ({ pageId, recordMap }: CommentsProps) => {
   const comments = (data?.results || []).map(item => {
     const user = recordMap.notion_user[item.created_by.id]?.value || {
       id: 'guest',
-      name: '익명',
+      name: 'Anonymous',
       profile_photo: '/comment.png',
     };
 
     return {
       id: item.id,
       user: user,
-      text: item?.rich_text?.[0]?.plain_text || '내용을 불러올 수 없습니다.',
+      text: item?.rich_text?.[0]?.plain_text || 'Content could not be loaded.',
       isOwner: user?.id !== 'guest',
       createdAt: formatDistance(new Date(), new Date(item.created_time), {
-        locale: ko,
+        locale: enUS,
       }),
     };
   });
 
   return (
     <div className="notion-comments">
-      <h2 className="notion-h notion-h1">댓글</h2>
+      <h2 className="notion-h notion-h1">Comment</h2>
 
       <form className={cs('item', loading && 'loading')} onSubmit={formik.handleSubmit}>
         <img className="profileImage guest" src="/comment.png" alt="guest" />
@@ -71,7 +71,7 @@ const Comments = ({ pageId, recordMap }: CommentsProps) => {
             <div className="bg" />
             <textarea
               name="content"
-              placeholder={`안녕하세요 👋\n이곳에 댓글 내용을 작성해주세요.`}
+              placeholder={`Hello 👋\nPlease write your comment here.`}
               rows={6}
               value={formik.values.content}
               onChange={formik.handleChange}
@@ -122,7 +122,7 @@ const Comments = ({ pageId, recordMap }: CommentsProps) => {
                   {item.user.name}
                 </div>
 
-                <div className="createdAt">{item.createdAt}전</div>
+                <div className="createdAt">{item.createdAt}ago</div>
               </div>
             </div>
           </div>
