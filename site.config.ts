@@ -2,23 +2,23 @@ import { siteConfig } from './lib/site-config';
 
 export default siteConfig({
   // the site's root Notion page (required)
-  rootNotionPageId: 'd1e89e9e42eb4ebf9486ae0374039efc',
+  rootNotionPageId: '55a46a4885ec4a7cac1685af269959c9',
 
   // if you want to restrict pages to a single notion workspace (optional)
   // (this should be a Notion ID; see the docs for how to extract this)
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: '2skydev blog',
-  domain: 'blog.2skydev.com',
-  author: '2skydev',
+  name: 'Stackdev',
+  domain: 'stackdev.top',
+  author: 'Stackdev',
 
   // open graph metadata (optional)
-  description: '2skydev blog - developer blog',
+  description: 'Stackdev blog - developer blog',
 
   // social usernames (optional)
   // twitter: 'transitive_bs',
-  github: '2skydev',
+  github: 'bihv',
   // linkedin: 'fisch2',
   // newsletter: '#', // optional newsletter URL
   // youtube: '#', // optional youtube channel name or `channel/UCGbXXXXXXXXXXXXXXXXXXXXXX`
