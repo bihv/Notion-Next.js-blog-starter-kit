@@ -122,7 +122,7 @@ const Comments = ({ pageId, recordMap }: CommentsProps) => {
                   {item.user.name}
                 </div>
 
-                <div className="createdAt">{item.createdAt}ago</div>
+                <div className="createdAt">{item.createdAt} ago</div>
               </div>
             </div>
           </div>
