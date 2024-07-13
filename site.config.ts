@@ -66,7 +66,7 @@ export default siteConfig({
   // -------- custom configs (2skydev) -------------
 
   // date-fns format string
-  dateformat: 'yyyy년 MM월 dd일',
+  dateformat: 'MMMM dd, yyyy',
 
   // post page - hidden properties
   hiddenPostProperties: ['설명', '상태', '최하위 정렬'],

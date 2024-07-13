@@ -31,7 +31,7 @@ export default async function handler(req: NextRequest) {
     const authorImage = siteConfig.defaultPageIcon;
     const publishedAt = properties?.['작성일']?.created_time;
     const publishedAtString = publishedAt
-      ? new Date(publishedAt).toLocaleDateString('ko-KR', {
+      ? new Date(publishedAt).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',

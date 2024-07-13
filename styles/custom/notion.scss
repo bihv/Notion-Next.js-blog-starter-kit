@@ -1,9 +1,9 @@
-// 스크롤 스타일 제거
+// Remove scroll style
 ::-webkit-scrollbar {
   display: none;
 }
 
-// 반응형 처리
+// Responsive processing
 @media only screen and (max-width: 1500px) {
   :root {
     --notion-page-left-right-padding: 8vw;
@@ -18,7 +18,7 @@
 }
 
 /**
- * ================ 전체적인 레이아웃 구성 관련 ================
+ * ================ Regarding overall layout composition ================
  */
 body {
   font-size: 16px;
@@ -50,7 +50,7 @@ body {
     }
   }
 
-  // 헤더
+  // header
   .notion-header {
     position: fixed;
     transition-duration: 250ms;
@@ -65,9 +65,9 @@ body {
     }
   }
 
-  // 다크모드 아닐때
+  // When not in dark mode
   &:not(.dark-mode) {
-    // 글 목록을 가지고 있는 페이지라면 배경 색 변경
+    // If the page has a list of posts, change the background color.
     .hasCollectionView {
       --bg-color: #f2f3f7;
     }
@@ -75,21 +75,21 @@ body {
 }
 
 /**
- * ================ notion 페이지 관련 스타일 ================
+ * ================ Notion Page Related Styles ================
  */
 .notion {
-  // 페이지
+  // Page
   .notion-page {
     line-height: 1.6;
   }
 
-  // 페이지 제목
+  // page title
   .notion-title {
     text-align: left;
     font-size: 2em;
   }
 
-  // 페이지 메인 이미지 (커버 이미지)
+  // Page main image (cover image)
   .notion-page-cover-wrapper,
   .notion-page-cover-wrapper span,
   .notion-page-cover-wrapper img {
@@ -100,18 +100,18 @@ body {
     max-height: calc(30vh + var(--notion-header-height)) !important;
   }
 
-  // 페이지 메인 이미지 (커버 이미지) 없을 때
+  // When there is no page main image (cover image)
   .notion-page-no-cover {
     margin-top: 130px !important;
   }
 
-  // 페이지 아이콘
+  // page icon
   .notion-page-icon-hero {
     margin-left: 0 !important;
     left: var(--notion-page-left-right-padding);
   }
 
-  // 페이지 속성들
+  // page properties
   .notion-collection-page-properties {
     .notion-collection-row {
       margin-bottom: 5rem;
@@ -161,8 +161,8 @@ body {
 
     .notion-property-select-item,
     .notion-property-multi_select-item {
-      background-color: transparent !important;
-      padding: 0;
+      // background-color: transparent !important;
+      // padding: 0;
     }
 
     .notion-property-multi_select-item {
@@ -174,13 +174,13 @@ body {
     }
   }
 
-  // 페이지 우측 사이드
+  // right side of the page
   .notion-aside {
     width: var(--notion-aside-width);
     margin-left: var(--notion-aside-space-width);
     flex: none;
 
-    // 우측 사이드 목차
+    // Right side table of contents
     .notion-contentPosition {
       width: 100%;
 
@@ -288,7 +288,7 @@ body {
     }
   }
 
-  // 메인 페이지인 경우
+  // In case of main page
   &.indexPage {
     .notion-nav-header {
       & > .breadcrumbs:first-child {
@@ -301,7 +301,7 @@ body {
     }
   }
 
-  // 메인페이지가 아닌 모든 페이지
+  // All pages other than the main page
   &.childPage {
     .notion-page-icon-hero.notion-page-icon-image span,
     .notion-page-icon-hero.notion-page-icon-image img {
@@ -316,10 +316,10 @@ body {
 }
 
 /**
- * ================ notion 페이지 - 기본 블럭 스타일 (본문 내용) ================
+ * ================ notion page - basic block style (body content) ================
  */
 .notion {
-  // 제목1 ~ 제목3
+  // Title 1 ~ Title 3
   .notion {
     &-h1 {
       font-size: 1.7rem;
@@ -345,12 +345,12 @@ body {
     }
   }
 
-  // 일반 본문
+  // plain text
   .notion-text {
     padding: 0.2em 2px;
   }
 
-  // 리스트
+  // List
   .notion-list {
     li {
       padding: 3.5px 0;
@@ -362,7 +362,7 @@ body {
     }
   }
 
-  // 인라인코드
+  // inline code
   .notion-inline-code {
     font-weight: 400;
     font-family: var(--notion-font);
@@ -374,7 +374,7 @@ body {
     transition: 250ms background-color;
   }
 
-  // 코드
+  // code
   .notion-code {
     .notion-code-copy {
       top: 0.7rem;
@@ -385,12 +385,12 @@ body {
     }
   }
 
-  // 구분선
+  // contour
   .notion-hr {
     margin: 6px 0;
   }
 
-  // 콜아웃
+  // callout
   .notion-callout {
     border-radius: 8px;
 
@@ -422,7 +422,7 @@ body {
     }
   }
 
-  // 인용
+  // Quotation
   .notion-quote {
     font-style: normal;
     font-size: var(--base-font-size);
@@ -433,7 +433,7 @@ body {
     transition: 250ms background-color;
   }
 
-  // 체크박스 (할일)
+  // Checkbox (to-do)
   .notion-property-checkbox {
     &-unchecked {
       border-radius: 2px;
@@ -454,17 +454,17 @@ body {
     }
   }
 
-  // 파일 첨부 - 아이콘
+  // Attach File - Icon
   .notion-file-icon {
     fill: var(--fg-color);
   }
 
-  // 페이지 링크 스타일
+  // Page Link Style
   .notion-page-title-text {
     border-bottom: none;
   }
 
-  // 링크
+  // link
   .notion-link:focus,
   .notion-link:hover {
     border-bottom-color: transparent;
@@ -482,7 +482,7 @@ body {
     // transition-duration: 300ms;
   }
 
-  // 북마크
+  // bookmark
   .notion-bookmark {
     transition: 250ms border-color;
 
@@ -499,12 +499,12 @@ body {
     }
   }
 
-  // 아이콘 (페이지 아이콘, 콜아웃 아이콘)
+  // icon (page icon, callout icon)
   .notion-page-icon {
     font-family: 'Tossface';
   }
 
-  // 테이블
+  // table
   .notion-simple-table-wrap {
     max-width: 100%;
     overflow-x: auto;
@@ -520,10 +520,10 @@ body {
 }
 
 /**
- * ================ notion 페이지 - 커스텀 블럭 스타일 ================
+ * ================ notion page - custom block styles ================
  */
 .notion {
-  // 유저 프로필
+  // user profile
   .notion-user-container {
     display: flex;
     align-items: center;
@@ -533,7 +533,7 @@ body {
     }
   }
 
-  // 데이터베이스 - 갤러리뷰
+  // Database - Gallery View
   .postList {
     display: flex;
     flex-wrap: wrap;
@@ -662,19 +662,19 @@ body {
 }
 
 /**
- * ================ 다크모드 처리 ================
+ * ================ Dark mode processing ================
  */
 .dark-mode {
   background-color: var(--bg-color);
 
-  // 헤더
+  // header
   .notion-header {
     .breadcrumb {
       text-shadow: 0 0 3px black;
     }
   }
 
-  // 검색
+  // search
   .notion-search {
     color: var(--fg-color);
     caret-color: var(--fg-color);
