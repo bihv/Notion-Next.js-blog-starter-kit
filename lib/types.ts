@@ -16,6 +16,8 @@ export interface PageProps {
   pageId?: string;
   error?: PageError;
   draftView?: boolean;
+  tagsPage?: boolean;
+  propertyToFilterName?: string | string;
 }
 
 export interface Params extends ParsedUrlQuery {
