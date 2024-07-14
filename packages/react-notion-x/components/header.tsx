@@ -27,7 +27,7 @@ export const Header: React.FC<{
 const _Breadcrumbs: React.FC<{
   block: types.Block;
   rootOnly?: boolean;
-}> = ({ block, rootOnly = false }) => {
+}> = ({ block, rootOnly = true }) => {
   const { recordMap, mapPageUrl, components } = useNotionContext();
 
   const breadcrumbs = React.useMemo(() => {

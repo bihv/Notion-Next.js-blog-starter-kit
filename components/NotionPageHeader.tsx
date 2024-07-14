@@ -77,7 +77,9 @@ export const NotionPageHeader: React.FC<{
             })
             .filter(Boolean)}
 
-          <ToggleThemeButton />
+          <div className="toggle-theme-button-desktop">
+            <ToggleThemeButton />
+          </div>
 
           {isSearchEnabled && <Search block={block} title={null} />}
 

@@ -700,3 +700,11 @@ body {
     }
   }
 }
+
+
+/* Hide the toggle button on screens smaller than 768px */
+@media (max-width: 768px) {
+  .toggle-theme-button-desktop {
+    display: none;
+  }
+}
