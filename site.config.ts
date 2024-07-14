@@ -52,15 +52,14 @@ export default siteConfig({
   // important pages
   navigationStyle: 'custom',
   navigationLinks: [
-    // {
-    //   title: '카테고리',
-    //   pageId: '36400db511474331b5c1de6918212469',
-    // },
-    // {
-    //   title: '카테고리',
-    //   pageId: '36400db511474331b5c1de6918212469',
-    //   menuPage: true,
-    // },
+    {
+      title: 'About',
+      pageId: 'd64b9f0dec354a18996ff303ef805894',
+    },
+    {
+      title: 'Contact',
+      pageId: 'b6261f21028149599642dba77cf9d7b0',
+    },
   ],
 
   // -------- custom configs (2skydev) -------------
