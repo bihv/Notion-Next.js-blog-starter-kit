@@ -1459,6 +1459,9 @@ svg.notion-page-icon {
 
   user-select: none;
   cursor: pointer;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  height: 100%;
 }
 
 .notion-collection-card:hover {
