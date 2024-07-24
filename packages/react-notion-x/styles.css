@@ -273,6 +273,7 @@
   flex-grow: 1;
   align-items: center;
   min-height: calc(100vh - var(--notion-header-height));
+  top: var(--notion-header-height);
 }
 
 .notion-red,
