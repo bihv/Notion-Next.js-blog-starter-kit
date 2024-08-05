@@ -24,6 +24,8 @@ export interface SiteConfig {
   isPreviewImageSupportEnabled?: boolean;
   isTweetEmbedSupportEnabled?: boolean;
   isRedisEnabled?: boolean;
+  REDIS_HOST?: string;
+  REDIS_PASSWORD?: string;
   isSearchEnabled?: boolean;
 
   includeNotionIdInUrls?: boolean;

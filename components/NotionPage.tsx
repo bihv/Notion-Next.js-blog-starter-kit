@@ -153,6 +153,14 @@ const propertySelectValue = (
     )
   }
 
+  if (pageHeader && schema.type === 'select' && value) {
+    return (
+      <Link href={`/categories/${value}`} key={key}>
+        {defaultFn()}
+      </Link>
+    )
+  }
+
   return defaultFn()
 }
 
