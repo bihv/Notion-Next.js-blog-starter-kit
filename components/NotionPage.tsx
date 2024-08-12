@@ -41,7 +41,7 @@ import styles from './styles.module.css'
 const Code = dynamic(() =>
   import('react-notion-x/third-party/code').then(async (m) => {
     // add / remove any prism syntaxes here
-    await Promise.all([
+    await Promise.allSettled([
       import('prismjs/components/prism-markup-templating.js'),
       import('prismjs/components/prism-markup.js'),
       import('prismjs/components/prism-bash.js'),
@@ -72,7 +72,10 @@ const Code = dynamic(() =>
       import('prismjs/components/prism-stylus.js'),
       import('prismjs/components/prism-swift.js'),
       import('prismjs/components/prism-wasm.js'),
-      import('prismjs/components/prism-yaml.js')
+      import('prismjs/components/prism-yaml.js'),
+      import('prismjs/components/prism-css.js'),
+      import('prismjs/components/prism-javascript.js'),
+      
     ])
     return m.Code
   })
