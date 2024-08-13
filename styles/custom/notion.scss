@@ -95,9 +95,9 @@ body {
   .notion-page-cover-wrapper img {
     max-width: 100% !important;
     border-radius: 0;
-    height: calc(30vh + var(--notion-header-height)) !important;
-    min-height: calc(30vh + var(--notion-header-height)) !important;
-    max-height: calc(30vh + var(--notion-header-height)) !important;
+    height: calc(20vh + var(--notion-header-height)) !important;
+    min-height: calc(20vh + var(--notion-header-height)) !important;
+    max-height: calc(20vh + var(--notion-header-height)) !important;
   }
 
   // When there is no page main image (cover image)
