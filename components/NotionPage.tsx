@@ -225,7 +225,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
     parsePageId(block?.id) === parsePageId('d64b9f0dec354a18996ff303ef805894')
 
   const showTableOfContents = !!isBlogPost
-  const minTableOfContentsItems = 3
+  const minTableOfContentsItems = 30
 
   const pageAside = React.useMemo(
     () => (
