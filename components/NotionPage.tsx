@@ -33,6 +33,7 @@ import { Page404 } from './Page404'
 import { PageAside } from './PageAside'
 import { PageHead } from './PageHead'
 import styles from './styles.module.css'
+import { DiscussionEmbed } from 'disqus-react';
 
 // -----------------------------------------------------------------------------
 // dynamic imports for optional components
@@ -277,6 +278,13 @@ export const NotionPage: React.FC<types.PageProps> = ({
   const canonicalPageUrl =
     !config.isDev && getCanonicalPageUrl(site, recordMap)(pageId)
 
+  const disqus =<DiscussionEmbed
+    shortname={config.disqusShortname}
+    config={ {
+      url: (canonicalPageUrl ? canonicalPageUrl : ""),
+      title: title
+    } }
+  />
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
       (block as PageBlock).format?.page_cover ||
@@ -329,6 +337,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
         footer={footer}
         pageTitle={tagsPage && propertyToFilterName ? title : undefined}
         pageCover={pageCover}
+        pageFooter={pageId === site.rootNotionPageId ? null : (config.disqusShortname ? disqus : null)}
       />
     </>
   )

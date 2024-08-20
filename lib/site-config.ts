@@ -41,6 +41,7 @@ export interface SiteConfig {
   defaultTheme: 'light' | 'dark' | 'system';
   enableComment: boolean;
   contentPositionTextAlign: 'left' | 'right';
+  disqusShortname?: string | null
 }
 
 export interface NavigationLink {

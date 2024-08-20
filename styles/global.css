@@ -30,3 +30,11 @@ body {
   height: 1.2em !important;
   width: 1.2em !important;
 }
+
+#disqus_thread {
+  width:  100%;
+}
+
+#disqus_recommendations {
+  width: 100%;
+}

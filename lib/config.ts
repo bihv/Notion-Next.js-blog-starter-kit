@@ -181,3 +181,6 @@ export const contentPositionTextAlign: SiteConfig['contentPositionTextAlign'] = 
   'left',
 );
 export const enableComment: boolean = getSiteConfig('enableComment', false);
+
+// ----------------------------------------------------------------------------
+export const disqusShortname : string | null = getSiteConfig('disqusShortname', null)

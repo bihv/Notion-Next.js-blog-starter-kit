@@ -78,4 +78,7 @@ export default siteConfig({
 
   // enable comment
   enableComment: true,
+
+  // To enable Disqsus Comments, include your Disqus Shortname here
+  disqusShortname: 'stackdev-1',
 });
