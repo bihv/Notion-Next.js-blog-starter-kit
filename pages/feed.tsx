@@ -57,18 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       : publishedTime
       ? new Date(publishedTime)
       : undefined;
-
-    // Create an object with the required properties for getSocialImageUrl
-    const socialImageParams = {
-      title,
-      image: undefined, // Add actual image URL if available
-      imageObjectPosition: undefined, // Add actual position if available
-      author: undefined, // Add actual author if available
-      authorImage: undefined, // Add actual author image URL if available
-      detail: undefined, // Add actual detail if available
-    };
-
-    const socialImageUrl = getSocialImageUrl(socialImageParams);
+    const socialImageUrl = getSocialImageUrl(pageId);
 
     feed.item({
       title,
