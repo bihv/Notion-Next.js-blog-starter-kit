@@ -12,9 +12,7 @@ import {
   getBlockTitle,
   getPageProperty,
   normalizeTitle,
-  parsePageId,
-  getBlockIcon,
-  isUrl
+  parsePageId
 } from 'notion-utils'
 import BodyClassName from 'react-body-classname'
 import { NotionRenderer } from 'react-notion-x'
@@ -289,40 +287,14 @@ export const NotionPage: React.FC<types.PageProps> = ({
   />
   const socialImage = mapImageUrl(
     getPageProperty<string>('Social Image', block, recordMap) ||
-    (block as PageBlock).format?.page_cover ||
-    config.defaultPageCover,
+      (block as PageBlock).format?.page_cover ||
+      config.defaultPageCover,
     block
   )
 
-  const socialImageCoverPosition =
-    (block as PageBlock).format?.page_cover_position ??
-    config.defaultPageCoverPosition
-  const socialImageObjectPosition = socialImageCoverPosition
-    ? `center ${(1 - socialImageCoverPosition) * 100}%`
-    : null
-
-  const blockIcon = getBlockIcon(block, recordMap)
-  const socialAuthorImage = mapImageUrl(
-    blockIcon && isUrl(blockIcon) ? blockIcon : config.defaultPageIcon,
-    block
-  )
-
-  const socialAuthor =
-    getPageProperty<string>('Author', block, recordMap) || config.author
-
-    const socialDescription =
+  const socialDescription =
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
-
-  const timePublished = getPageProperty<number>('Published', block, recordMap)
-  const datePublished = timePublished ? new Date(timePublished) : undefined
-  const socialDate =
-    isBlogPost && datePublished
-      ? `${datePublished.toLocaleString('en-US', {
-          month: 'long'
-        })} ${datePublished.getFullYear()}`
-      : undefined
-  const socialDetail = socialDate || site.domain
 
   return (
     <>
@@ -332,10 +304,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
         title={title}
         description={socialDescription}
         image={socialImage}
-        imageObjectPosition={socialImageObjectPosition}
-        author={socialAuthor}
-        authorImage={socialAuthorImage}
-        detail={socialDetail}
         url={canonicalPageUrl}
       />
 

@@ -11,35 +11,15 @@ export const PageHead: React.FC<
     description?: string
     image?: string
     url?: string
-    imageObjectPosition?: string
-    author?: string
-    authorImage?: string
-    detail?: string
   }
-  > = ({
-    site,
-    title,
-    description,
-    image,
-    imageObjectPosition,
-    author,
-    authorImage,
-    detail,
-    url
-  }) => {
+> = ({ site, title, description, pageId, image, url }) => {
   const rssFeedUrl = `${config.host}/feed`
 
   title = title ?? site?.name
   description = description ?? site?.description
 
-  const socialImageUrl = getSocialImageUrl({
-    title,
-    image,
-    imageObjectPosition,
-    author,
-    authorImage,
-    detail
-  })
+  const socialImageUrl = getSocialImageUrl(pageId) || image
+
   return (
     <Head>
       <meta charSet='utf-8' />
@@ -48,8 +28,7 @@ export const PageHead: React.FC<
         name='viewport'
         content='width=device-width, initial-scale=1, shrink-to-fit=no'
       />
-      <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fefffe" key="theme-color-light"/>
-      <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#2d3439" key="theme-color-dark"/>
+
       <meta name='robots' content='index,follow' />
       <meta property='og:type' content='website' />
 

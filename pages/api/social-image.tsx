@@ -1,171 +1,135 @@
-import React from 'react'
-import { withOGImage } from 'next-api-og-image'
-import { interRegular } from '../../lib/fonts'
+import { NextRequest } from 'next/server';
+import * as React from 'react';
 
-/**
- * Social image generation via headless chrome.
- *
- * Note: To debug social images, set `debugInspectHtml` to true and load a social
- * image URL. Instead of returning the rendered image, it will return the raw HTML
- * that would've been passed to puppeteer. This makes it much easier to develop
- * and debug issues locally.
- */
-const debugInspectHtml = false
+import * as siteConfig from 'lib/config';
 
-export default withOGImage<
-  'query',
-  | 'title'
-  | 'image'
-  | 'author'
-  | 'authorImage'
-  | 'detail'
-  | 'imageObjectPosition'
->({
-  template: {
-    react: ({
-      title,
-      image,
-      author,
-      authorImage,
-      detail,
-      imageObjectPosition
-    }) => {
-      return (
-        <html>
-          <head>
-            <style dangerouslySetInnerHTML={{ __html: style }} />
-          </head>
+import { ImageResponse } from '@vercel/og';
 
-          <body>
-            <div className='container'>
-              <div className='horiz'>
-                <div className='lhs'>
-                  <div className='main'>
-                    <h1 className='title'>{title}</h1>
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const { id } = Object.fromEntries(searchParams);
+
+    const result = await fetch(`https://api.notion.com/v1/pages/${id}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+      },
+    });
+
+    const { properties, cover } = await result.json();
+
+    const image = cover?.external?.url || cover?.file?.url || siteConfig.defaultPageCover;
+    const title = properties?.['이름']?.title?.[0]?.plain_text || siteConfig.name;
+    const description = properties?.['설명']?.rich_text?.[0]?.plain_text || siteConfig.description;
+    const tags = (properties?.['태그']?.multi_select || []).map((tag: any) => tag.name);
+    const author = siteConfig.author;
+    const authorImage = siteConfig.defaultPageIcon;
+    const publishedAt = properties?.['작성일']?.created_time;
+    const publishedAtString = publishedAt
+      ? new Date(publishedAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      : siteConfig.domain;
+
+    return new ImageResponse(
+      (
+        <div
+          style={{
+            display: 'flex',
+            padding: '46px',
+            background: '#1F2027',
+            color: 'white',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'space-between',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              flex: 1,
+              height: '100%',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <h1 style={{ fontSize: '46px', fontWeight: 'bold', paddingTop: '24px' }}>{title}</h1>
+              <p style={{ fontSize: '18px', opacity: 0.8 }}>{description}</p>
+              <div style={{ display: 'flex', fontSize: '18px', opacity: 0.6 }}>
+                {tags.map((tag: string, i) => (
+                  <div
+                    key={tag}
+                    style={{ display: 'flex', marginRight: tags.length === i + 1 ? '' : '10px' }}
+                  >
+                    #{tag}
                   </div>
-
-                  <div className='metadata'>
-                    {authorImage && (
-                      <div
-                        className='author-image'
-                        style={{ backgroundImage: `url(${authorImage})` }}
-                      />
-                    )}
-
-                    {(author || detail) && (
-                      <div className='metadata-rhs'>
-                        {author && <div className='author'>{author}</div>}
-                        {detail && <div className='detail'>{detail}</div>}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {image && (
-                  <img
-                    src={image}
-                    className='rhs'
-                    style={{
-                      objectPosition: imageObjectPosition || undefined
-                    }}
-                  />
-                )}
+                ))}
               </div>
             </div>
-          </body>
-        </html>
-      )
-    }
-  },
-  cacheControl: 'max-age 86400, stale-while-revalidate=3600',
-  type: 'jpeg',
-  quality: 75,
-  dev: {
-    inspectHtml: debugInspectHtml
-  }
-})
 
-const style = `
-@font-face {
-  font-family: 'Inter';
-  font-style:  normal;
-  font-weight: normal;
-  src: url(data:font/woff2;charset=utf-8;base64,${interRegular}) format('woff2');
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                src={authorImage}
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                  borderRadius: '50%',
+                  marginRight: '16px',
+                }}
+              />
+
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <div style={{ fontSize: '32px', opacity: 0.8 }}>{author}</div>
+                <div style={{ fontSize: '20px', opacity: 0.8 }}>{publishedAtString}</div>
+              </div>
+            </div>
+          </div>
+
+          {image && (
+            <img
+              src={image}
+              style={{
+                width: '35%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                borderRadius: '5px',
+                marginLeft: '36px',
+              }}
+            />
+          )}
+        </div>
+      ),
+      {
+        width: 1200,
+        height: 630,
+      },
+    );
+  } catch (e: any) {
+    console.error(`${e.message}`);
+
+    return new Response(`Failed to generate the image`, {
+      status: 500,
+    });
+  }
 }
-:root {
-  --padding: 8vmin;
-}
-* {
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Inter', sans-serif;
-  padding: 0;
-  margin: 0;
-}
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: var(--padding);
-  background: #1F2027;
-  color: #fff;
-}
-.horiz {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: var(--padding);
-  width: 100%;
-  height: 100%;
-}
-.lhs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.rhs {
-  width: 50%;
-  height: 100%;
-  border-radius: 4px;
-  object-fit: scale-down;
-}
-.title {
-  font-size: 3em;
-}
-.metadata {
-  color: #A9ACC0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: calc(var(--padding) * 0.7);
-  font-size: 1.5em;
-}
-.author {
-  font-size: 1.75em;
-}
-.author-image {
-  background-size: cover;
-  width: 20vmin;
-  min-width: 20vmin;
-  max-width: 20vmin;
-  height: 20vmin;
-  min-height: 20vmin;
-  max-height: 20vmin;
-  border-radius: 50%;
-  border: 1.5vmin solid #fff;
-}
-.metadata-rhs {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.5em;
-}
-.detail {
-  overflow-wrap: break-word;
-}
-  `
