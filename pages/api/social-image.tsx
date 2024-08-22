@@ -24,12 +24,12 @@ export default async function handler(req: NextRequest) {
     const { properties, cover } = await result.json();
 
     const image = cover?.external?.url || cover?.file?.url || siteConfig.defaultPageCover;
-    const title = properties?.['이름']?.title?.[0]?.plain_text || siteConfig.name;
-    const description = properties?.['설명']?.rich_text?.[0]?.plain_text || siteConfig.description;
-    const tags = (properties?.['태그']?.multi_select || []).map((tag: any) => tag.name);
+    const title = properties?.Name?.title[0]?.plain_text || siteConfig.name;
+    // const description = properties?.['설명']?.rich_text?.[0]?.plain_text || siteConfig.description;
+    const tags = (properties?.Tags?.multi_select || []).map((tag: any) => tag.name);
     const author = siteConfig.author;
     const authorImage = siteConfig.defaultPageIcon;
-    const publishedAt = properties?.['작성일']?.created_time;
+    const publishedAt = properties?.Published?.date?.start;
     const publishedAtString = publishedAt
       ? new Date(publishedAt).toLocaleDateString('en-US', {
           year: 'numeric',
@@ -62,7 +62,7 @@ export default async function handler(req: NextRequest) {
           >
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <h1 style={{ fontSize: '46px', fontWeight: 'bold', paddingTop: '24px' }}>{title}</h1>
-              <p style={{ fontSize: '18px', opacity: 0.8 }}>{description}</p>
+              {/* <p style={{ fontSize: '18px', opacity: 0.8 }}>{description}</p> */}
               <div style={{ display: 'flex', fontSize: '18px', opacity: 0.6 }}>
                 {tags.map((tag: string, i) => (
                   <div

@@ -11,10 +11,10 @@ export default siteConfig({
   // basic site info (required)
   name: 'Stackdev',
   domain: 'stackdev.top',
-  author: 'Stackdev',
+  author: 'Admin',
 
   // open graph metadata (optional)
-  description: 'Stackdev blog - developer blog',
+  description: 'Optimizing code efficiency: Essential tips for software engineers to enhance performance and productivity.',
 
   // social usernames (optional)
   // twitter: 'transitive_bs',
