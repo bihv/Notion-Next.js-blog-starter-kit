@@ -9,8 +9,8 @@ export default siteConfig({
   rootNotionSpaceId: null,
 
   // basic site info (required)
-  name: 'Stackdev',
-  domain: 'stackdev.top',
+  name: 'Paste',
+  domain: 'paste.io.vn',
   author: 'Admin',
 
   // open graph metadata (optional)
