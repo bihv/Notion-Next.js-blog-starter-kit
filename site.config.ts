@@ -26,7 +26,7 @@ export default siteConfig({
 
   // default notion icon and cover images for site-wide consistency (optional)
   // page-specific values will override these site-wide defaults
-  defaultPageIcon: '/default-avatar.webp',
+  defaultPageIcon: 'https://paste.io.vn/default-avatar.webp',
   defaultPageCover: '/page-cover.jpg',
   defaultPageCoverPosition: 0.5,
 
