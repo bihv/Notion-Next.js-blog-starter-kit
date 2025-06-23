@@ -8,7 +8,7 @@ import enUS from 'date-fns/locale/en-US';
 import { useFormik } from 'formik';
 import useSWR from 'swr';
 
-import { ExtendedRecordMap } from '~/packages/notion-types';
+import { ExtendedRecordMap } from 'notion-types';
 
 interface CommentsProps {
   pageId: string;

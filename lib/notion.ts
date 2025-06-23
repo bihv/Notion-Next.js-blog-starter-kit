@@ -30,7 +30,12 @@ const getNavigationLinkPages = pMemoize(async (): Promise<ExtendedRecordMap[]> =
 });
 
 export interface GetPageOptions {
-  draftView?: boolean;
+  concurrency?: number;
+  fetchMissingBlocks?: boolean;
+  fetchCollections?: boolean;
+  signFileUrls?: boolean;
+  chunkLimit?: number;
+  chunkNumber?: number;
 }
 
 export async function getPage(

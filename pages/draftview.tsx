@@ -6,9 +6,9 @@ import { resolveNotionPage } from 'lib/resolve-notion-page';
 
 export const getServerSideProps = async () => {
   try {
-    const props = await resolveNotionPage(domain, null, { draftView: true });
+    const props = await resolveNotionPage(domain, null);
 
-    return { props };
+    return { props: { ...props, draftView: true } };
   } catch (err) {
     console.error('page error', domain, err);
 
